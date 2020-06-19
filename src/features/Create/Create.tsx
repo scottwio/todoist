@@ -45,7 +45,7 @@ export const Create = ({navigation}: CreateProps) => {
   return (
     <View style={styles.container}>
       <Text textStyle="bold" style={styles.text}>
-        Todo name
+        To-do name
       </Text>
       <TextInput
         value={name}
