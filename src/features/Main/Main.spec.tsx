@@ -2,24 +2,25 @@ import React from 'react';
 import {render, fireEvent} from 'react-native-testing-library';
 import {Main} from '../Main/Main';
 import {ReduxProvider, store} from '@store/store';
-
-export const navigationMock = {
-  navigate: jest.fn(),
-};
+import {mockNavigationProps} from '@root/test-utils/router';
 
 const RenderMain = () =>
   render(
     <ReduxProvider>
-      <Main navigation={navigationMock} />
+      <Main {...mockNavigationProps} />
     </ReduxProvider>,
   );
 
 describe('Main Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should navigate to create page', () => {
     const {getByTestId} = RenderMain();
     const btn = getByTestId('create-todo');
     fireEvent.press(btn);
-    expect(navigationMock.navigate).toBeCalledWith('Create');
+    expect(mockNavigationProps.navigation.navigate).toBeCalledWith('Create');
   });
 
   it('should display list of todo items', async () => {

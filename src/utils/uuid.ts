@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 export const uuid = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     var r = (Math.random() * 16) | 0,

@@ -2,17 +2,12 @@ import React from 'react';
 import {render, fireEvent} from 'react-native-testing-library';
 import {ReduxProvider, store} from '@store/store';
 import {Create} from '../Create/Create';
-
-export const navigationMock = {
-  navigate: jest.fn(),
-  goBack: jest.fn(),
-  setOptions: jest.fn(),
-};
+import {mockNavigationProps} from '@root/test-utils/router';
 
 const RenderCreate = () =>
   render(
     <ReduxProvider>
-      <Create navigation={navigationMock} />
+      <Create {...mockNavigationProps} />
     </ReduxProvider>,
   );
 
@@ -32,7 +27,7 @@ describe('Create Component', () => {
     const result = state.todoCollection.entity.filter(
       (todo) => todo.title === textForTodo,
     )[0];
-    expect(navigationMock.goBack).toHaveBeenCalled();
+    expect(mockNavigationProps.navigation.goBack).toHaveBeenCalled();
     expect(result).toBeDefined();
   });
 
@@ -47,7 +42,7 @@ describe('Create Component', () => {
     const result = state.todoCollection.entity.filter(
       (todo) => todo.title === textForTodo,
     )[0];
-    expect(navigationMock.goBack).not.toHaveBeenCalled();
+    expect(mockNavigationProps.navigation.goBack).not.toHaveBeenCalled();
     expect(result).toBeUndefined();
   });
 });

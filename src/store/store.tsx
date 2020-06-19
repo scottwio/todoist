@@ -24,9 +24,11 @@ const reducer = combineReducers({
   todoCollection: todoCollectionReducer,
 });
 
+// devtools needs access to window
+declare var window: any;
 const loadDevTools = () => {
-  const castWindow = window as any;
   if (__DEV__ && typeof window !== 'undefined') {
+    const castWindow = window as any;
     return (
       castWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
       castWindow.__REDUX_DEVTOOLS_EXTENSION__()
