@@ -31,7 +31,7 @@ describe('Create Component', () => {
     expect(result).toBeDefined();
   });
 
-  it('should now allow empty todo text to be submitted', () => {
+  it('should not allow empty todo text to be submitted', () => {
     const textForTodo = '';
     const {getByTestId} = RenderCreate();
     const btn = getByTestId('create-todo-submit');
