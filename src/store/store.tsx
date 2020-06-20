@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Todo} from '@models/todo';
 import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
@@ -28,16 +28,15 @@ const reducer = combineReducers({
 declare var window: any;
 const loadDevTools = () => {
   if (__DEV__ && typeof window !== 'undefined') {
-    const castWindow = window as any;
     return (
-      castWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
-      castWindow.__REDUX_DEVTOOLS_EXTENSION__()
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__()
     );
   }
 };
 
 export const store = createStore(reducer, loadDevTools());
 
-export const ReduxProvider = (props: {children: any}) => {
+export const ReduxProvider = (props: {children: ReactElement}) => {
   return <Provider store={store}>{props.children}</Provider>;
 };
