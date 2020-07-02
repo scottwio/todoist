@@ -12,11 +12,17 @@ export const todoCollectionReducer: Reducer<TodoCollectionState, Actions> = (
 ): TodoCollectionState => {
   switch (action.type) {
     case TodoCollectionActionTypes.done:
-      const todo = state.entity.filter((item) => item.id === action.payload)[0];
-      if (todo) {
-        todo.done = !todo.done;
-      }
-      return {...state, entity: [...state.entity]};
+      const todosCollection = state.entity.map((item) => {
+        if (item.id === action.payload) {
+          return {
+            ...item,
+            done: !item.done,
+          };
+        } else {
+          return item;
+        }
+      });
+      return {...state, entity: todosCollection};
     case TodoCollectionActionTypes.add:
       return {...state, entity: [...state.entity, action.payload]};
     default:
